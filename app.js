@@ -40,7 +40,7 @@ var s3 = new S3Client({
   });
   
   // call S3 to retrieve upload file to specified bucket
-  var uploadParams = {Bucket: process.env.cfBucket, Key: '', Body: ''};
+  var uploadParams = {Bucket: process.env.CF_Bucket, Key: '', Body: ''};
   
   // Configure the file stream and obtain the upload parameters
   
