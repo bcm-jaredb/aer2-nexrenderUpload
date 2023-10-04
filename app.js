@@ -54,6 +54,7 @@ var s3 = new S3Client({
   });
   uploadParams.Body = fileStream;
   uploadParams.Key = 'renders/'+filename;
+  uploadParams.ContentType= 'video/mp4';
   
   // upload
   try {
