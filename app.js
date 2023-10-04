@@ -52,7 +52,7 @@ var s3 = new S3Client({
                 return reject(new Error('Error in bcm-upload module'));
   });
   uploadParams.Body = fileStream;
-  uploadParams.Key = path.basename(file);
+  uploadParams.Key = input;
   
   // upload
   try {
