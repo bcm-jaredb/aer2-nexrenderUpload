@@ -58,6 +58,12 @@ var s3 = new S3Client({
   try {
     const data = await s3.send(new PutObjectCommand(uploadParams));
     settings.logger.log(`[${job.uid}] [action-bcm-upload] Object uploaded successfully:`, data);
+    if(options.eraseInput){
+        settings.logger.log(`[${job.uid}] [action-bcm-upload] erasing input ${input}`)
+        fs.unlinkSync(input)
+    }
+    settings.logger.log(`[${job.uid}] [action-bcm-upload] upload process complete`)
+    resolve(job);
   } catch (error) {
     console.log("Error with bcm-upload")
     console.log(error);
@@ -67,12 +73,5 @@ return reject(new Error('Error in bcm-upload module'));
   }
   
 
-  console.log("Download %s from %s", upload.file.name, upload.url)
-                if(options.eraseInput){
-                    settings.logger.log(`[${job.uid}] [action-bcm-upload] erasing input ${input}`)
-                    fs.unlinkSync(input)
-                }
-                settings.logger.log(`[${job.uid}] [action-bcm-upload] upload process complete`)
-                resolve(job);
     })
 }
