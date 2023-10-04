@@ -1,0 +1,11 @@
+{
+  "name": "aer2-nexrenderupload",
+  "version": "1.0.0",
+  "description": "upload to r2 in nexrender process",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jared Brosius - Beavercreek",
+  "license": "ISC"
+}
