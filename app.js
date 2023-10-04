@@ -1,6 +1,7 @@
 const {name}  = require('./package.json')
 const path = require('path')
 const fs = require('fs');
+require('dotenv').config();
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 
 module.exports = (job, settings, { input, productionUID, output, ...options }, type) => {
