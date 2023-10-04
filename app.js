@@ -22,6 +22,7 @@ module.exports = (job, settings, { input, productionUID, output, ...options }, t
     
         /* check if input has been provided */
         input = input || job.output;
+        let filename=input;
 
         /* fill absolute/relative paths */
         if (!path.isAbsolute(input)) input = path.join(job.workpath, input);
@@ -52,7 +53,7 @@ var s3 = new S3Client({
                 return reject(new Error('Error in bcm-upload module'));
   });
   uploadParams.Body = fileStream;
-  uploadParams.Key = input;
+  uploadParams.Key = 'renders/'+filename;
   
   // upload
   try {
