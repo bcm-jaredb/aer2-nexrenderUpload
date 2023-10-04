@@ -18,7 +18,7 @@ module.exports = (job, settings, { input, productionUID, output, ...options }, t
     settings.logger.log(`[${job.uid}] [action-bcm-upload] fileType is set to ${fileType}`)
     settings.logger.log(`[${job.uid}] [action-bcm-upload] job.output is set to ${job.output}`)
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
     
         /* check if input has been provided */
         input = input || job.output;
@@ -55,7 +55,17 @@ var s3 = new S3Client({
   uploadParams.Key = path.basename(file);
   
   // upload
-  s3.send(new PutObjectCommand(uploadParams));
+  try {
+    const data = await s3.send(new PutObjectCommand(uploadParams));
+    settings.logger.log(`[${job.uid}] [action-bcm-upload] Object uploaded successfully:`, data);
+  } catch (error) {
+    console.log("Error with bcm-upload")
+    console.log(error);
+    settings.logger.log(`[${job.uid}] [action-bcm-upload] Error in upload:`, error);
+return reject(new Error('Error in bcm-upload module'));
+    
+  }
+  
 
   console.log("Download %s from %s", upload.file.name, upload.url)
                 if(options.eraseInput){
